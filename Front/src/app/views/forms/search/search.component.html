@@ -1,0 +1,203 @@
+<!-- <app-docs-example href="forms/form-control#readonly"> -->
+<!-- <app-docs-example href="forms/form-control#readonly"> -->
+<form cForm class="row g-3" [formGroup]="form" (ngSubmit)="save()">
+  <div class="col-2">
+    <!-- <input type="text" formControlName="name" name="name" /> -->
+    <input
+      cFormControl
+      id="name"
+      placeholder="name"
+      type="textbox"
+      [formGroup]="form"
+      [defaultValue]="curentObj.name"
+      [(ngModel)]="curentObj.name"
+      [ngModelOptions]="{ standalone: true }"
+    />
+  </div>
+  <div class="col-2">
+    <!-- <input cFormControl id="city" placeholder="city" type="textbox" /> -->
+    <select name="city" id="city" (change)="onChangeCity($event.target)" class="form-select">
+      @for (item of cities; track $index) {
+      <option [value]='item.id' [selected]="item.id == curentObj.city" >{{ item.title }}</option>
+      }
+    </select>
+  </div>
+  <div class="col-2">
+    <input
+      cFormControl
+      id="phone"
+      placeholder="phone"
+      type="textbox"
+      [formGroup]="form"
+      [defaultValue]="curentObj.phone"
+      [(ngModel)]="curentObj.phone"
+      [ngModelOptions]="{ standalone: true }"
+      required
+      maxlength="11"
+    />
+  </div>
+  <div class="col-2">
+    <input
+      cFormControl
+      id="fax"
+      placeholder="fax"
+      type="textbox"
+      [formGroup]="form"
+      [defaultValue]="curentObj.fax"
+      [(ngModel)]="curentObj.fax"
+      [ngModelOptions]="{ standalone: true }"
+      maxlength="11"
+    />
+  </div>
+  <div class="col-1">
+    <input
+      cFormControl
+      id="coworkers"
+      placeholder="coworkers"
+      type="textbox"
+      [formGroup]="form"
+      [defaultValue]="curentObj.coworkers"
+      [(ngModel)]="curentObj.coworkers"
+      [ngModelOptions]="{ standalone: true }"
+    />
+  </div>
+  <div class="col-2">
+    <input
+      cFormControl
+      id="address"
+      placeholder="address"
+      type="textbox"
+      [formGroup]="form"
+      [defaultValue]="curentObj.address"
+      [(ngModel)]="curentObj.address"
+      [ngModelOptions]="{ standalone: true }"
+    />
+  </div>
+
+  <div class="col-1">
+    @if (!showEditBtn){
+      <!-- [disabled]="!form.valid" -->
+      <button cButton class="mb-3" type="submit" (click)="save()" >
+        save
+      </button>
+    }
+    @if(showEditBtn){
+      <button cButton class="mb-3" type="submit" (click)="update()" >
+        update
+      </button>
+      <button cButton class="mb-3" type="button" (click)="cancel()" >
+        cancel
+      </button>
+    }
+  </div>
+</form>
+
+<form cForm class="row g-3">
+  <div class="col-auto">
+    <!-- <label cLabel class="visually-hidden" for="inputPassword2">
+      Password
+    </label> -->
+    <input
+      cFormControl
+      id="searchTxt"
+      placeholder="search name"
+      type="textbox"
+      (keyup)="onSearchName($event)"
+    />
+  </div>
+  <div class="col-auto">
+    <button cButton class="mb-3" (click)="search()">search</button>
+  </div>
+  <div class="col-auto">
+    <button cButton class="mb-3" (click)="download()">downloadTxt</button>
+  </div>
+</form>
+<!-- </app-docs-example> -->
+<table
+  [hover]="true"
+  [responsive]="true"
+  [striped]="true"
+  align="middle"
+  cTable
+  class="mb-0 border"
+>
+  <thead class="text-nowrap text-truncate">
+    <tr>
+      <th class="bg-body-tertiary text-center">
+        <svg cIcon name="cilPeople"></svg>
+      </th>
+      <th class="bg-body-tertiary text-center">Name</th>
+      <th class="bg-body-tertiary text-center">City</th>
+      <th class="bg-body-tertiary text-center">Address</th>
+      <th class="bg-body-tertiary text-center">Phone</th>
+      <th class="bg-body-tertiary text-center">Fax</th>
+      <th class="bg-body-tertiary text-center">Coworkers</th>
+      <th class="bg-body-tertiary text-center">opration</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (customer of customers; track customer.name; let i = $index) {
+    <tr>
+      <!-- <td class="text-center">
+        <c-avatar
+          [size]="'md'"
+          src="{{ customer.avatar }}"
+          id="{{ customer.id }}"
+        />
+      </td> -->
+      <td>
+        <c-avatar></c-avatar>
+      </td>
+      <td class="text-center">
+        <div>{{ customer.name }}</div>
+      </td>
+      <td class="text-center">
+        <div class="float-start">
+          <p>{{ customer.city }}</p>
+        </div>
+      </td>
+      <td>
+        <div class="text-center">
+          <p>{{ customer.address }}</p>
+        </div>
+      </td>
+      <td>
+        <div class="text-center">
+          <p>{{ customer.phone }}</p>
+        </div>
+      </td>
+      <td>
+        <div class="text-center">
+          <p>{{ customer.fax }}</p>
+        </div>
+      </td>
+      <td>
+        <div class="text-center">
+          <p>{{ customer.coworkers }}</p>
+        </div>
+      </td>
+      <td class="text-center">
+        <div class="text-center">
+          <button
+            (click)="delete(i)"
+            cButton
+            class="btn-danger text-light"
+            style="margin-right: 10px"
+          >
+            <!-- <i class="cil-delete"></i> -->
+            Delete
+          </button>
+          <button (click)="edit(i)" cButton class="info">
+            <!-- <i class="cil-delete"></i> -->
+            Edit
+          </button>
+        </div>
+      </td>
+      <td>
+        <div class="small text-body-secondary">Last login</div>
+        <div class="fw-semibold text-nowrap">{{ customer.name }}</div>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

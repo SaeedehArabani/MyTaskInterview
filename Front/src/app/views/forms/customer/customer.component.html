@@ -1,0 +1,37 @@
+<!-- <app-docs-example href="forms/form-control#readonly"> -->
+    <form cForm class="row g-3" [formGroup]="form" (ngSubmit)="onSubmit()" >
+      <div class="col-auto">
+        <input type="text" formControlName="name" name="name" />
+        <input cFormControl id="name" placeholder="name" type="textbox" [formGroup]="form"  [defaultValue]="curentObj.name"  [(ngModel)]="curentObj.name"[ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="col-auto">
+        <!-- <input cFormControl id="city" placeholder="city" type="textbox" /> -->
+        <select name="city" id="city" [formGroup]="form" >
+          <option value="Tehran">Tehran</option>
+          <option value="Rasht">Rasht</option>
+          <option value="Mashhad">Mashhad</option>
+          <option value="Ahvaz">Ahvaz</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <input cFormControl id="phone" placeholder="phone" type="textbox" [formGroup]="form" [defaultValue]="curentObj.phone" [(ngModel)]="curentObj.phone"[ngModelOptions]="{standalone: true}" required/>
+      </div>
+      <div class="col-auto">
+        <input cFormControl id="fax" placeholder="fax" type="textbox" [formGroup]="form" [defaultValue]="curentObj.fax" [(ngModel)]="curentObj.fax"[ngModelOptions]="{standalone: true}" />
+      </div>
+      <div class="col-auto">
+        <input cFormControl id="coworkers" placeholder="coworkers" type="textbox" [formGroup]="form" [defaultValue]="curentObj.coworkers" [(ngModel)]="curentObj.coworkers"[ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="col-auto">
+        <input cFormControl id="address" placeholder="address" type="textbox" [formGroup]="form"[defaultValue]="curentObj.address" [(ngModel)]="curentObj.address"[ngModelOptions]="{standalone: true}"/>
+      </div>
+  
+      </form>
+           
+      <div class="col-auto">
+        <button cButton class="mb-3" type="submit"  (click)="onSubmit()" >
+          <!-- [disabled]="!form.valid" -->
+          save
+        </button>
+      </div>
+     

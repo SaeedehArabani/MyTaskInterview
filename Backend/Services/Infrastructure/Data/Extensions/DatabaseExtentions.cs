@@ -1,0 +1,42 @@
+﻿using Domain.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Infrastructure.Data.Extensions;
+public static class DatabaseExtensions
+{
+    public static async Task InitializeDatabaseAsync(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        context.Database.MigrateAsync().GetAwaiter().GetResult();
+
+        await SeedAsync(context);
+    }
+    
+    private static async Task SeedAsync(ApplicationDbContext context)
+    {
+        await SeedCityAsync(context);
+        await SeedCustomerAsync(context);
+    }
+
+    private static async Task SeedCustomerAsync(ApplicationDbContext context)
+    {
+        if (!await context.Customers.AnyAsync())
+        {
+            await context.Customers.AddRangeAsync(InitialData.Customers);
+            await context.SaveChangesAsync();
+        }
+    }
+
+    private static async Task SeedCityAsync(ApplicationDbContext context)
+    {
+        if (!await context.Cities.AnyAsync())
+        {
+            await context.Cities.AddRangeAsync(InitialData.Cities);
+            await context.SaveChangesAsync();
+        }
+    }
+}
