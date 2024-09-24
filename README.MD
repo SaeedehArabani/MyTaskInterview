@@ -3,9 +3,11 @@
 # MyTaskInterview
 
 ## Overview
-This project contains an ASP.NET Core 8 Web API, MSSQL 2019 and Angular 18 front-end. It allows you to Create, Read ,Update, Delete (CRUD) Operations on customer entity export a txt file that customers are added, and some practice like filter a fantastic function in javaScript.
-Clean Architecture with CQRS Design Pattern and Mediator library are used. Although Minimal APIs are used because the scale of the project was small.
-This Task is done for Bahman.co interview session
+This project consists of an ASP.NET Core 8 Web API, MSSQL 2019 database, and an Angular 18 front-end. It supports full Create, Read, Update, Delete (CRUD) operations on the Customer entity, as well as the ability to export customer data to a .txt file. The project also includes features like data filtering, along with practical JavaScript functionality.
+
+The solution follows a Clean Architecture with the CQRS (Command Query Responsibility Segregation) design pattern, utilizing the Mediator library for improved separation of concerns. Additionally, Fluent Validation, a powerful open-source library, has been implemented for input validation. Minimal APIs were incorporated, given the small scale of the project.
+
+This task was completed as part of the interview process for Bahman.co.
 
 ## Prerequisites
 - .NET SDK 8.0 or higher
